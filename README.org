@@ -1,0 +1,57 @@
+#+TITLE: rofi-snippets
+
+Make /rofi/ insert any defined snippet, directly to the text input you're writing in.
+
+This code for this repository is found at https://github.com/chelmertz/rofi-snippets
+
+* Install dependencies
+You need =xsel= and =xdotool=.
+
+* Configure /rofi/
+
+** Add the snippets modi to your /rofi/ configuration, point at your copy of the script:
+
+#+BEGIN_SRC shell
+rofi -show snippets -modi snippets:~/code/github/chelmertz/rofi-snippets/rofi_snippets.sh
+#+END_SRC
+
+** Trying out some snippets
+
+#+BEGIN_SRC shell :results none
+mkdir ~/snips
+printf "my snippet\nis so long\nit requires newlines\n" > ~/snips/a-test-snippet
+# open up a program that waits for text input, like gedit
+# start rofi
+#+END_SRC
+
+** (Optional) Changing the location of your snippets
+
+By default, =~/snips= is used. You override this by giving /rofi/ the environment variable =SNIPDIR=, like:
+
+#+BEGIN_SRC shell
+env SNIPDIR=/tmp/my-snippets rofi -show snippets -modi snippets:~/code/github/chelmertz/rofi-snippets/rofi_snippets.sh
+#+END_SRC
+
+* What makes up a snippet?
+
+Have a *single directory with files* in it.
+
+The *filename is the name of the snippet*.
+
+The *file's contents makes up for the snippet*.
+
+* Some alternatives
+** pet
+https://brianshumate.com/articles/command-line-snippets/
+
+Not chosen because it seems overkill, and (looks like) it wants to own the GUI. In my case, I want rofi to be the front end.
+** rofi-modi-snippets
+https://github.com/raphaelfournier/rofi-modi-snippets
+
+Would suit me, but (commenting on version d24d25aa6):
+
+- don't allow for snippet contents with newlines (i.e. a mail signature or whatever)
+- don't allow for snippets with a specific delimiter (i.e. it cuts a configured snippet like =a|b|c=, with the separator =|=, to snippet =a= with content =b=)
+- allows for duplicate snippet names, silently matching on the first occurrence
+- needs to change hardcoded paths in the cloned script
+- uses =xdotool type= which is slow in my tests (compared to =xsel -bo; xdotool key ctrl+v=)
