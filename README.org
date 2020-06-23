@@ -1,8 +1,8 @@
-#+TITLE: rofi-snippets
+#+TITLE: rofi-blah-blah — snippets
 
 Make /rofi/ insert any defined snippet, directly to the text input you're writing in.
 
-This code for this repository is found at https://github.com/chelmertz/rofi-snippets
+This code for this repository is found at https://github.com/chelmertz/rofi-blah-blah
 
 * Install dependencies
 You need =xsel= and =xdotool=.
@@ -12,7 +12,7 @@ You need =xsel= and =xdotool=.
 ** Add the snippets modi to your /rofi/ configuration, point at your copy of the script:
 
 #+BEGIN_SRC shell
-rofi -show snippets -modi snippets:~/code/github/chelmertz/rofi-snippets/rofi_snippets.sh
+rofi -show snippets -modi snippets:~/code/github/chelmertz/rofi-blah-blah/rofi-blah-blah
 #+END_SRC
 
 ** Trying out some snippets
@@ -29,7 +29,7 @@ printf "my snippet\nis so long\nit requires newlines\n" > ~/snips/a-test-snippet
 By default, =~/snips= is used. You override this by giving /rofi/ the environment variable =SNIPDIR=, like:
 
 #+BEGIN_SRC shell
-env SNIPDIR=/tmp/my-snippets rofi -show snippets -modi snippets:~/code/github/chelmertz/rofi-snippets/rofi_snippets.sh
+env SNIPDIR=/tmp/my-snippets rofi -show snippets -modi snippets:~/code/github/chelmertz/rofi-blah-blah/rofi-blah-blah
 #+END_SRC
 
 * What makes up a snippet?
@@ -55,3 +55,5 @@ Would suit me, but (commenting on version d24d25aa6):
 - allows for duplicate snippet names, silently matching on the first occurrence
 - needs to change hardcoded paths in the cloned script
 - uses =xdotool type= which is slow in my tests (compared to =xsel -bo; xdotool key ctrl+v=)
+* Known issues
+** Pasting into non ctrl+v compat programs (vim, terminals, ...)
