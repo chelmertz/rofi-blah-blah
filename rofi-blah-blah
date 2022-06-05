@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-SNIPDIR=${SNIPDIR:-~/snips}
+SNIPDIR=~/snips # symlink a directory here, it's not too easy to pass config to rofi scripts
 
 # fail early if deps are not found
 which xsel 2>&1 >/dev/null
